@@ -27,9 +27,23 @@ function estimateInfectionsByRequestedTime({
     : durationInDays;
 }
 
+// estimate severe cases by requested time
+function estimateSevereCasesByRequestedTime(infectionsByRequestedTime) {
+  return Math.floor(infectionsByRequestedTime * 0.15);
+}
+
+// estimate total available beds for severe positive cases
+function estimateAvailableBedsForSevereCases({
+  totalHospitalBeds,
+  severeCasesByRequestedTime
+}) {
+  const availableBedsForSevereCases = Math.floor(totalHospitalBeds * 0.35);
+  return availableBedsForSevereCases - severeCasesByRequestedTime;
+}
+
 // estimate cases
 function estimateCases(data, numberInfected) {
-  const { reportedCases, periodType, timeToElapse } = data;
+  const { reportedCases, periodType, timeToElapse, totalHospitalBeds } = data;
 
   const durationInDays = normaliseDurationInDays({ periodType, timeToElapse });
 
@@ -40,9 +54,20 @@ function estimateCases(data, numberInfected) {
     durationInDays
   });
 
+  // challenge 2 codes
+  const severeCasesByRequestedTime = estimateSevereCasesByRequestedTime(
+    infectionsByRequestedTime
+  );
+  const hospitalBedsByRequestedTime = estimateAvailableBedsForSevereCases({
+    totalHospitalBeds,
+    severeCasesByRequestedTime
+  });
+
   return {
     currentlyInfected,
-    infectionsByRequestedTime
+    infectionsByRequestedTime,
+    severeCasesByRequestedTime,
+    hospitalBedsByRequestedTime
   };
 }
 
