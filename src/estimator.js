@@ -7,9 +7,9 @@ function estimateInfected({ reportedCases, numberInfected }) {
 function normaliseDurationInDays({ periodType, timeToElapse }) {
   switch (periodType) {
     case 'weeks':
-      return timeToElapse * 7;
+      return timeToElapse / 7;
     case 'months':
-      return timeToElapse * 31;
+      return timeToElapse / 31;
     default:
       return timeToElapse;
   }
