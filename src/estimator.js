@@ -37,8 +37,7 @@ function estimateAvailableBedsForSevereCases({
   totalHospitalBeds,
   severeCasesByRequestedTime
 }) {
-  const availableBedsForSevereCases = Math.floor(totalHospitalBeds * 0.35);
-  return availableBedsForSevereCases - severeCasesByRequestedTime;
+  return Math.floor(totalHospitalBeds * 0.35) - severeCasesByRequestedTime;
 }
 
 // estimate cases
