@@ -23,7 +23,7 @@ function estimateInfectionsByRequestedTime({
   durationInDays
 }) {
   return durationInDays > 2
-    ? Math.floor(currentlyInfected * 2 ** Math.floor(durationInDays / 3))
+    ? currentlyInfected * 2 ** Math.floor(durationInDays / 3)
     : durationInDays;
 }
 
