@@ -22,13 +22,12 @@ function estimateInfectionsByRequestedTime({
 }) {
   const infectionsDoublePeriodInDays = 3;
   return Math.floor(
-    currentlyInfected *
-      Math.pow(2, durationInDays / infectionsDoublePeriodInDays)
+    currentlyInfected * (2 ** durationInDays / infectionsDoublePeriodInDays)
   );
 }
 
 // estimate cases
-function estimateCases(data, numberInfected) {
+function estimateCases({ data, numberInfected }) {
   const { reportedCases, periodType, timeToElapse } = data;
 
   const durationInDays = normaliseDurationInDays({ periodType, timeToElapse });
