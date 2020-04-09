@@ -5,11 +5,13 @@ function estimateInfected({ reportedCases, numberInfected }) {
 
 // normalise duration in days
 function normaliseDurationInDays({ periodType, timeToElapse }) {
-  switch (periodType) {
+  switch (periodType.toLowerCase()) {
+    case 'days':
+      return timeToElapse;
     case 'weeks':
-      return timeToElapse / 7;
+      return timeToElapse * 7;
     case 'months':
-      return timeToElapse / 31;
+      return timeToElapse * 30;
     default:
       return timeToElapse;
   }
@@ -20,10 +22,9 @@ function estimateInfectionsByRequestedTime({
   currentlyInfected,
   durationInDays
 }) {
-  const infectionsDoublePeriodInDays = 3;
-  return Math.floor(
-    currentlyInfected * (2 ** durationInDays / infectionsDoublePeriodInDays)
-  );
+  return durationInDays > 2
+    ? Math.floor(currentlyInfected * 2 ** Math.floor(durationInDays / 3))
+    : durationInDays;
 }
 
 // estimate cases
