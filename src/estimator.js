@@ -1,6 +1,6 @@
 // estimate currently infected
-function estimateInfected({ reportedCases, numberOfInfected }) {
-  return reportedCases * numberOfInfected;
+function estimateInfected({ reportedCases, numberInfected }) {
+  return reportedCases * numberInfected;
 }
 
 // normalise duration in days
@@ -27,7 +27,7 @@ function estimateInfectionsByRequestedTime({
 }
 
 // estimate cases
-function estimateCases({ data, numberInfected }) {
+function estimateCases(data, numberInfected) {
   const { reportedCases, periodType, timeToElapse } = data;
 
   const durationInDays = normaliseDurationInDays({ periodType, timeToElapse });
@@ -51,8 +51,8 @@ const covid19ImpactEstimator = (data) => {
 
   return {
     data,
-    impact: estimateCases({ data, impactInfected }),
-    severeImpact: estimateCases({ data, severeImpactInfected })
+    impact: estimateCases(data, impactInfected),
+    severeImpact: estimateCases(data, severeImpactInfected)
   };
 };
 
