@@ -42,7 +42,9 @@ function estimateAvailableBedsForSevereCases({
 
 // estimate cases
 function estimateCases(data, numberInfected) {
-  const { reportedCases, periodType, timeToElapse, totalHospitalBeds } = data;
+  const {
+    reportedCases, periodType, timeToElapse, totalHospitalBeds
+  } = data;
 
   const durationInDays = normaliseDurationInDays({ periodType, timeToElapse });
 
