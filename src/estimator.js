@@ -22,9 +22,7 @@ function estimateInfectionsByRequestedTime({
   currentlyInfected,
   durationInDays
 }) {
-  return durationInDays > 2
-    ? currentlyInfected * Math.floor(2 ** durationInDays / 3)
-    : durationInDays;
+  return currentlyInfected * (2 ** Math.floor(durationInDays / 3));
 }
 
 // estimate severe cases by requested time
