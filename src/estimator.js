@@ -39,6 +39,33 @@ function estimateAvailableBedsForSevereCases({
   return Math.trunc(totalAvailableHospitalBeds - severeCasesByRequestedTime);
 }
 
+// estimate dollars in flight
+function estimateDollarsInFlight({
+  avgDailyIncomeInUSD,
+  avgDailyIncomePopulation,
+  infectionsByRequestedTime,
+  durationInDays
+}) {
+  let dollars =
+    infectionsByRequestedTime *
+    avgDailyIncomeInUSD *
+    avgDailyIncomePopulation *
+    durationInDays;
+  return Number(dollars.toFixed(1));
+}
+
+// estimate ventilator cases
+function estimateVentilatorsByRequestedTime(
+  infectionsByRequestedTime
+) {
+  return Math.trunc(infectionsByRequestedTime * 0.02);
+}
+
+// estimate ICU
+function estimateICUByRequestedTime(infectionsByRequestedTime) {
+  return Math.trunc(infectionsByRequestedTime * 0.05);
+}
+
 // estimate cases
 function estimateCases(data, numberInfected) {
   const {
@@ -63,11 +90,28 @@ function estimateCases(data, numberInfected) {
     severeCasesByRequestedTime
   });
 
+  // challenge 3 codes
+  const casesForICUByRequestedTime = estimateICUByRequestedTime(
+    infectionsByRequestedTime
+  );
+  const casesForVentilatorsByRequestedTime = estimateVentilatorsByRequestedTime(
+    infectionsByRequestedTime
+  );
+  const dollarsInFlight = estimateDollarsInFlight({
+    avgDailyIncomeInUSD,
+    avgDailyIncomePopulation,
+    infectionsByRequestedTime,
+    durationInDays
+  });
+
   return {
     currentlyInfected,
     infectionsByRequestedTime,
     severeCasesByRequestedTime,
-    hospitalBedsByRequestedTime
+    hospitalBedsByRequestedTime,
+    casesForICUByRequestedTime,
+    casesForVentilatorsByRequestedTime,
+    dollarsInFlight
   };
 }
 
