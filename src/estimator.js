@@ -72,8 +72,7 @@ function estimateCases(data, numberInfected) {
     periodType,
     timeToElapse,
     totalHospitalBeds,
-    avgDailyIncomeInUSD,
-    avgDailyIncomePopulation
+    region: { avgDailyIncomeInUSD, avgDailyIncomePopulation }
   } = data;
 
   const durationInDays = normaliseDurationInDays({ periodType, timeToElapse });
