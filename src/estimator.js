@@ -22,12 +22,12 @@ function estimateInfectionsByRequestedTime({
   currentlyInfected,
   durationInDays
 }) {
-  return currentlyInfected * (2 ** Math.floor(durationInDays / 3));
+  return currentlyInfected * (2 ** Math.trunc(durationInDays / 3));
 }
 
 // estimate severe cases by requested time
 function estimateSevereCasesByRequestedTime(infectionsByRequestedTime) {
-  return Math.floor(infectionsByRequestedTime * 0.15);
+  return Math.trunc(infectionsByRequestedTime * 0.15);
 }
 
 // estimate total available beds for severe positive cases
@@ -35,7 +35,7 @@ function estimateAvailableBedsForSevereCases({
   totalHospitalBeds,
   severeCasesByRequestedTime
 }) {
-  return Math.floor(totalHospitalBeds * 0.35 - severeCasesByRequestedTime);
+  return Math.trunc(totalHospitalBeds * 0.35 - severeCasesByRequestedTime);
 }
 
 // estimate cases
