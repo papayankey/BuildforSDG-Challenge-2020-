@@ -46,23 +46,23 @@ function estimateDollarsInFlight({
   infectionsByRequestedTime,
   durationInDays
 }) {
-  const dollars = infectionsByRequestedTime
+  const dollars = Math.trunc(Math.trunc(infectionsByRequestedTime
     * avgDailyIncomeInUSD
-    * avgDailyIncomePopulation
-    * durationInDays;
-  return Number(dollars.toFixed(1));
+    * avgDailyIncomePopulation)
+    / durationInDays);
+  return dollars;
 }
 
 // estimate ventilator cases
 function estimateVentilatorsByRequestedTime(
   infectionsByRequestedTime
 ) {
-  return Math.floor(infectionsByRequestedTime * 0.02);
+  return Math.trunc(infectionsByRequestedTime * 0.02);
 }
 
 // estimate ICU
 function estimateICUByRequestedTime(infectionsByRequestedTime) {
-  return Math.floor(infectionsByRequestedTime * 0.05);
+  return Math.trunc(infectionsByRequestedTime * 0.05);
 }
 
 // estimate cases
