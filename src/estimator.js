@@ -57,12 +57,14 @@ function estimateDollarsInFlight({
 function estimateVentilatorsByRequestedTime(
   infectionsByRequestedTime
 ) {
-  return Math.trunc(infectionsByRequestedTime * 0.02);
+  const estimateVentilators = infectionsByRequestedTime * 0.02;
+  return Math.trunc(estimateVentilators);
 }
 
 // estimate ICU
 function estimateICUByRequestedTime(infectionsByRequestedTime) {
-  return Math.trunc(infectionsByRequestedTime * 0.05);
+  const estimateICU = infectionsByRequestedTime * 0.05;
+  return Math.trunc(estimateICU);
 }
 
 // estimate cases
