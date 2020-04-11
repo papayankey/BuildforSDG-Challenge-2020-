@@ -46,11 +46,10 @@ function estimateDollarsInFlight({
   infectionsByRequestedTime,
   durationInDays
 }) {
-  let dollars =
-    infectionsByRequestedTime *
-    avgDailyIncomeInUSD *
-    avgDailyIncomePopulation *
-    durationInDays;
+  const dollars = infectionsByRequestedTime
+    * avgDailyIncomeInUSD
+    * avgDailyIncomePopulation
+    * durationInDays;
   return Number(dollars.toFixed(1));
 }
 
@@ -69,7 +68,12 @@ function estimateICUByRequestedTime(infectionsByRequestedTime) {
 // estimate cases
 function estimateCases(data, numberInfected) {
   const {
-    reportedCases, periodType, timeToElapse, totalHospitalBeds
+    reportedCases,
+    periodType,
+    timeToElapse,
+    totalHospitalBeds,
+    avgDailyIncomeInUSD,
+    avgDailyIncomePopulation
   } = data;
 
   const durationInDays = normaliseDurationInDays({ periodType, timeToElapse });
