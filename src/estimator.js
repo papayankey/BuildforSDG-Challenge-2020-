@@ -5,7 +5,7 @@ function estimateInfected({ reportedCases, numberInfected }) {
 
 // normalise duration in days
 function normaliseDurationInDays({ periodType, timeToElapse }) {
-  switch (periodType.toLowerCase()) {
+  switch (periodType) {
     case 'days':
       return timeToElapse;
     case 'weeks':
@@ -35,7 +35,8 @@ function estimateAvailableBedsForSevereCases({
   totalHospitalBeds,
   severeCasesByRequestedTime
 }) {
-  return Math.trunc(totalHospitalBeds * 0.35 - severeCasesByRequestedTime);
+  const totalAvailableHospitalBeds = totalHospitalBeds * 0.35;
+  return Math.trunc(totalAvailableHospitalBeds - severeCasesByRequestedTime);
 }
 
 // estimate cases
